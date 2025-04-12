@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Patient Login/Register</title>
+  <link rel="stylesheet" href="../css/style.css" />
+</head>
+<body>
+  <div class="container">
+    <h2>Welcome to Symptom-to-Specialist</h2>
+    <div class="tab-buttons">
+      <button id="login-tab">Login</button>
+      <button id="register-tab">Register</button>
+    </div>
+
+    <!-- Login Form -->
+    <form id="login-form" class="auth-form">
+      <h3>Patient Login</h3>
+      <input type="email" id="login-email" placeholder="Email" required />
+      <input type="password" id="login-password" placeholder="Password" required />
+      <button type="submit">Login</button>
+    </form>
+
+    <!-- Register Form -->
+    <form id="register-form" class="auth-form" style="display: none;">
+      <h3>Patient Register</h3>
+        <input type="text" id="register-name" placeholder="Name" required />
+        <input type="email" id="register-email" placeholder="Email" required />
+        <input type="password" id="register-password" placeholder="Password" required />
+        <input type="number" id="register-age" placeholder="Age" required />
+
+        <select id="register-gender" required>
+        <option value="">Select Gender</option>
+        <option value="Male">Male</option>
+        <option value="Female">Female</option>
+        <option value="Other">Other</option>
+        </select>
+
+      <button type="submit">Register</button>
+    </form>
+
+    <div class="switch-login">
+      <p>Doctor? <a href="../login/doctor-login.html">Doctor Login</a></p>
+      <p>Admin? <a href="../login/admin-login.html">Admin Login</a></p>
+    </div>
+  </div>
+
+  <script src="../js/auth.js"></script>
+</body>
+</html>
