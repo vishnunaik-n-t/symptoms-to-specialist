@@ -30,7 +30,7 @@ loginForm.onsubmit = async (e) => {
 
   if (res.ok) {
     localStorage.setItem("token", data.token);
-    window.location.href = "../patient/dashboard.html";
+    window.location.href = "./patient/dashboard.html";
   } else {
     alert(data.message || "Login failed");
   }
@@ -38,24 +38,26 @@ loginForm.onsubmit = async (e) => {
 
 // Register Form Submit
 registerForm.onsubmit = async (e) => {
-  e.preventDefault();
-  const name = document.getElementById("register-name").value;
-  const email = document.getElementById("register-email").value;
-  const password = document.getElementById("register-password").value;
-  const age = document.getElementById("register-age").value;
-
-  const res = await fetch("http://localhost:5000/api/patients/register", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ name, email, password, age }),
-  });
-
-  const data = await res.json();
-
-  if (res.ok) {
-    alert("Registration successful. Please login.");
-    loginTab.click(); // switch to login tab
-  } else {
-    alert(data.message || "Registration failed");
-  }
-};
+    e.preventDefault();
+    const name = document.getElementById("register-name").value;
+    const email = document.getElementById("register-email").value;
+    const password = document.getElementById("register-password").value;
+    const age = document.getElementById("register-age").value;
+    const gender = document.getElementById("register-gender").value;
+  
+    const res = await fetch("http://localhost:5000/api/patients/register", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ name, email, password, age, gender }),
+    });
+  
+    const data = await res.json();
+  
+    if (res.ok) {
+      alert("Registration successful. Please login.");
+      loginTab.click(); // switch to login tab
+    } else {
+      alert(data.message || "Registration failed");
+    }
+  };
+  
