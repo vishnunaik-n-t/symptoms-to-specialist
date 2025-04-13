@@ -7,7 +7,7 @@ const DoctorSchema = new mongoose.Schema({
     password: { type: String, required: true },
     specialist: { type: String, required: true },
     experience: { type: Number, required: true },
-    availability: { type: Boolean, default: true }, // True if available for appointments
+    availability: { type: Boolean, default: true },  
 }, { timestamps: true });
 
 // Hash password before saving

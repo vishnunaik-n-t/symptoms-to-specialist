@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>My Appointments</title>
+  <!-- <link rel="stylesheet" href="styles.css"> -->
+  <style>
+    body {
+  font-family: sans-serif;
+  padding: 20px;
+  background: #f4f4f4;
+}
+h1, h2 {
+  color: #333;
+}
+.appointment-list {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-bottom: 40px;
+}
+.appointment-card {
+  background: white;
+  padding: 15px;
+  border-left: 5px solid #4CAF50;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.cancel-btn {
+  margin-top: 10px;
+  background-color: #ff4444;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.cancel-btn:hover {
+  background-color: #e60000;
+}
+
+  </style>
+</head>
+<body>
+  <h1>My Appointments</h1>
+
+  <section>
+    <h2>Upcoming Appointments</h2>
+    <div id="upcoming-appointments" class="appointment-list"></div>
+  </section>
+
+  <section>
+    <h2>Past Appointments</h2>
+    <div id="past-appointments" class="appointment-list"></div>
+  </section>
+
+  <script src="../js/my-appointments.js"></script>
+</body>
+</html>

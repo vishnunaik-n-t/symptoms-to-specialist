@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Book Appointment</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 30px;
+      background-color: #f4f4f4;
+    }
+
+    h2 {
+      text-align: center;
+    }
+
+    .section {
+      background-color: white;
+      padding: 20px;
+      margin-bottom: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+
+    label {
+      display: block;
+      margin-top: 15px;
+      font-weight: bold;
+    }
+
+    select, input[type="date"], button {
+      padding: 8px;
+      width: 100%;
+      margin-top: 5px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+
+    .tag-container {
+      display: flex;
+      flex-wrap: wrap;
+      margin-top: 10px;
+    }
+
+    .tag {
+      background-color: #007bff;
+      color: white;
+      padding: 5px 10px;
+      border-radius: 20px;
+      margin: 5px;
+      display: flex;
+      align-items: center;
+    }
+
+    .tag span {
+      margin-left: 8px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    #doctor-select, #time-select {
+      margin-top: 10px;
+    }
+
+    #book-btn {
+      background-color: green;
+      color: white;
+      font-weight: bold;
+      margin-top: 20px;
+      cursor: pointer;
+    }
+
+    #predict-btn {
+      background-color: #444;
+      color: white;
+      margin-top: 10px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>Book New Appointment</h2>
+
+  <div class="section">
+    <label for="symptom1">Select Symptoms 1 (Common)</label>
+    <select id="symptom1">
+      <option value="">-- Select --</option>
+    </select>
+
+    <label for="symptom2">Select Symptoms 2 (Moderate)</label>
+    <select id="symptom2">
+      <option value="">-- Select --</option>
+    </select>
+
+    <label for="symptom3">Select Symptoms 3 (Rare)</label>
+    <select id="symptom3">
+      <option value="">-- Select --</option>
+    </select>
+
+    <div class="tag-container" id="selected-symptoms"></div>
+
+    <button id="predict-btn">Predict Doctors</button>
+  </div>
+
+  <div class="section">
+    <label for="doctor-select">Select Doctor</label>
+    <select id="doctor-select">
+      <option value="">-- No doctor predicted yet --</option>
+    </select>
+
+    <label for="date">Select Date</label>
+    <input type="date" id="date">
+
+    <label for="time-select">Select Time</label>
+    <select id="time-select">
+      <option value="">-- Select --</option>
+      <option value="09:00 AM">09:00 AM</option>
+      <option value="10:00 AM">10:00 AM</option>
+      <option value="11:00 AM">11:00 AM</option>
+      <option value="12:00 PM">12:00 PM</option>
+      <option value="03:00 PM">03:00 PM</option>
+      <option value="04:00 PM">04:00 PM</option>
+      <option value="05:00 PM">05:00 PM</option>
+      <option value="06:00 PM">06:00 PM</option>
+    </select>
+
+    <button id="book-btn">Book Appointment</button>
+  </div>
+
+  <script src="../js/appointment.js"></script>
+</body>
+</html>

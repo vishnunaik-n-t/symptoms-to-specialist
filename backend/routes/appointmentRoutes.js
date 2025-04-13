@@ -18,8 +18,9 @@ router.post('/book-appointment', authMiddleware, async (req, res) => {
 
         const appointmentDate = new Date(date);
         const today = new Date();
-        if (appointmentDate < today) {
-            return res.status(400).json({ message: 'Appointment date must be in the future' });
+        const dateOnly = new Date(today.toISOString().split('T')[0] + 'T00:00:00.000Z');
+        if (appointmentDate < dateOnly) {
+            return res.status(400).json({ message: 'Appointment date must be in the future...' });
         }
 
         // Check if doctor exists & is available
@@ -65,8 +66,9 @@ router.get('/my-appointments', authMiddleware, async (req, res) => {
 
         // Separate upcoming and past appointments
         const today = new Date();
-        const upcomingAppointments = appointments.filter(appt => new Date(appt.date) >= today);
-        const pastAppointments = appointments.filter(appt => new Date(appt.date) < today);
+        const dateOnly = new Date(today.toISOString().split('T')[0] + 'T00:00:00.000Z');
+        const upcomingAppointments = appointments.filter(appt => new Date(appt.date) >= dateOnly);
+        const pastAppointments = appointments.filter(appt => new Date(appt.date) < dateOnly);
 
         res.status(200).json({
             upcomingAppointments,
@@ -93,7 +95,8 @@ router.delete('/cancel-appointment/:id', authMiddleware, async (req, res) => {
         // Check if appointment date is in the past
         const appointmentDate = new Date(appointment.date);
         const now = new Date();
-        if (appointmentDate < now) {
+        const dateOnly = new Date(now.toISOString().split('T')[0] + 'T00:00:00.000Z');
+        if (appointmentDate < dateOnly) {
             return res.status(400).json({ message: 'Cannot cancel past appointments' });
         }
 
