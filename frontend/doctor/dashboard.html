@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Doctor Dashboard</title>
+  <link rel="stylesheet" href="../css/doctor-dashboard.css" />
+</head>
+<body>
+  <div class="dashboard-container">
+    <header class="dashboard-header">
+      <h2>Welcome, <span id="doctorName">Doctor</span></h2>
+      <button class="btn logout-btn" onclick="logout()">Logout</button>
+    </header>
+
+    <section class="availability-section">
+      <h3>Availability Status</h3>
+      <div class="availability-status">
+        <span id="availabilityText">Loading...</span>
+        <button id="toggleBtn" class="btn toggle-btn" onclick="toggleAvailability()">Toggle</button>
+      </div>
+    </section>
+
+    <section class="appointments-section">
+        <h3>Your Appointments</h3>
+        <div id="appointmentsList" class="appointment-list">
+          <p>Loading appointments...</p>
+        </div>
+      </section>
+
+  </div>
+
+  <script src="../js/doctor-dashboard.js"></script>
+</body>
+</html>

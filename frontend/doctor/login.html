@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Doctor Login</title>
+  <link rel="stylesheet" href="../css/doctor.css" />
+</head>
+<body>
+  <div class="login-container">
+    <h2>Doctor Login</h2>
+    <div id="error" class="error"></div>
+    <input type="email" id="email" placeholder="Email" required />
+    <input type="password" id="password" placeholder="Password" required />
+    <button onclick="loginDoctor()">Login</button>
+    <div class="switch-login">
+        <p>Doctor? <a href="../patient-auth.html">Patient Login</a></p>
+        <p>Admin? <a href="../login/admin-login.html">Admin Login</a></p>
+      </div>
+  </div>
+  
+
+  <script src="../js/doctor-login.js">
+  </script>
+</body>
+</html>

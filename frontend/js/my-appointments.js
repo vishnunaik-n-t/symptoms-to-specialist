@@ -38,10 +38,12 @@ async function loadAppointments() {
         <p><strong>Date:</strong> ${new Date(appt.date).toLocaleDateString()}</p>
         <p><strong>Time:</strong> ${appt.time}</p>
         <p><strong>Status:</strong> ${appt.status}</p>
+        <p><strong>Prescription:</strong> ${appt.prescription.medicines}</p>
+        <p><strong>Note:</strong> ${appt.prescription.notes}</p>
       `;
   
       // Add Cancel Button for upcoming only
-      if (!isPast && appt.status !== "cancelled") {
+      if (!isPast && appt.status !== "cancelled" && appt.status !== "Accepted") {
         const cancelBtn = document.createElement('button');
         cancelBtn.textContent = 'Cancel Appointment';
         cancelBtn.className = 'cancel-btn';
@@ -69,9 +71,6 @@ async function loadAppointments() {
       const data = await res.json();
   
       if (res.ok) {
-        // alert("Appointment cancelled.");
-        // cardElement.querySelector("p:last-child").innerHTML = "<strong>Status:</strong> cancelled";
-        // cardElement.querySelector("button.cancel-btn")?.remove();
         alert("Appointment cancelled.");
         const statusParagraph = cardElement.querySelector("p:last-child");
         if (statusParagraph) {

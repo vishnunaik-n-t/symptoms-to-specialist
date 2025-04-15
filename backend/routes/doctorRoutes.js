@@ -49,6 +49,20 @@ router.post('/login', async (req, res) => {
     }
 });
 
+router.get('/profile', authDoctor, async (req, res) => {
+    try {
+      const doctor = await Doctor.findById(req.user.doctorId).select('-password');
+      if (!doctor) {
+        return res.status(404).json({ message: 'Doctor not found' });
+      }
+  
+      res.json(doctor);
+    } catch (error) {
+      console.error('Error fetching doctor profile:', error);
+      res.status(500).json({ message: 'Server error' });
+    }
+  });
+
 
 
 router.get('/view-appointments', authDoctor, async (req, res) => {
@@ -140,6 +154,27 @@ router.put('/prescribe/:appointmentId', authDoctor, async (req, res) => {
         res.status(500).json({ message: 'Server error' });
     }
 });
+
+router.put('/update-availability', authDoctor, async (req, res) => {
+    try {
+      const { availability } = req.body;
+  
+      if (typeof availability !== 'boolean') {
+        return res.status(400).json({ message: 'Invalid availability value' });
+      }
+  
+      const updatedDoctor = await Doctor.findByIdAndUpdate(
+        req.user.doctorId,
+        { availability },
+        { new: true }
+      );
+  
+      res.json({ message: 'Availability updated successfully' });
+    } catch (error) {
+      console.error('Error updating availability:', error);
+      res.status(500).json({ message: 'Server error' });
+    }
+  });
 
 
 module.exports = router;
