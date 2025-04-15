@@ -7,16 +7,18 @@
   <link rel="stylesheet" href="../css/style.css" />
 </head>
 <body>
-  <div class="container">
-    <h2>👋 Welcome, <span id="patient-name">Patient</span></h2>
+  <div class="dashboard-container">
+    <div class="dashboard-card">
+      <h2 class="welcome-text">👋 Welcome, <span id="patient-name">Patient</span></h2>
 
-    <div class="nav-buttons">
-      <button onclick="goTo('profile')">View/Update Profile</button>
-      <button onclick="goTo('book')">Book New Appointment</button>
-      <button onclick="goTo('appointments')">My Appointments</button>
+      <div class="nav-buttons">
+        <button class="dashboard-btn" onclick="goTo('profile')">View/Update Profile</button>
+        <button class="dashboard-btn" onclick="goTo('book')">Book New Appointment</button>
+        <button class="dashboard-btn" onclick="goTo('appointments')">My Appointments</button>
+      </div>
+
+      <button class="logout-btn" onclick="logout()">Logout</button>
     </div>
-
-    <button class="logout-btn" onclick="logout()">Logout</button>
   </div>
 
   <script src="../js/patient-dashboard.js"></script>

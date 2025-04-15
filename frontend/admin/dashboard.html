@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Admin Dashboard</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="dashboard-container">
+    <h2>Welcome, Admin</h2>
+    <div class="button-group">
+      <button id="showAddDoctorBtn">Add Doctor</button>
+      <button id="showViewDoctorsBtn">View Doctors</button>
+      <button id="logoutBtn">Logout</button>
+    </div>
+
+    <!-- Add Doctor Section -->
+    <section id="addDoctorSection" class="section hidden">
+      <h3>Add Doctor</h3>
+      <form id="addDoctorForm">
+        <input type="text" id="name" placeholder="Name" required />
+        <input type="email" id="email" placeholder="Email" required />
+        <input type="password" id="password" placeholder="Password" autocomplete="current-password" required />
+        <input type="text" id="specialist" placeholder="Specialist (e.g. Cardiologist)" required />
+        <select id="availability" required>
+            <option value="true">Available</option>
+            <option value="false">Not Available</option>
+          </select>          
+        <input type="number" id="experience" placeholder="Experience (Years)" required />
+        <button type="submit">Add Doctor</button>
+      </form>
+      <p id="addDoctorMsg"></p>
+    </section>
+
+    <!-- View Doctors Section -->
+    <section id="viewDoctorsSection" class="section hidden">
+      <h3>All Doctors</h3>
+      <table id="doctorsTable">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Specialist</th>
+            <th>Availability</th>
+            <th>Experience</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody id="doctorsTableBody">
+          <!-- Doctor rows go here -->
+        </tbody>
+      </table>
+    </section>
+  </div>
+
+   
+  <script src="dashboard.js"></script>
+</body>
+</html>

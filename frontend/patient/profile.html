@@ -9,7 +9,7 @@
 <body>
   <div class="container">
     <h2>📝 Patient Profile</h2>
-    <form id="profile-form">
+    <form id="profile-form" class="profile-form">
       <input type="text" id="name" placeholder="Name" required />
       <input type="email" id="email" placeholder="Email" disabled />
       <input type="number" id="age" placeholder="Age" required />
@@ -24,7 +24,7 @@
       <button type="submit">Update Profile</button>
     </form>
 
-    <button onclick="goBack()">← Back to Dashboard</button>
+    <button class="back-btn" onclick="goBack()">← Back to Dashboard</button>
   </div>
 
   <script src="../js/profile.js"></script>
