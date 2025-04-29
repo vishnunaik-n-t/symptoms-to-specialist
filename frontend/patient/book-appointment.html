@@ -3,6 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <title>Book Appointment</title>
+  <!-- Include Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -10,8 +12,10 @@
       background-color: #f4f4f4;
     }
 
-    h2 {
+    h1 {
       text-align: center;
+      margin-bottom: 30px;
+      font-weight: bold;
     }
 
     .section {
@@ -20,6 +24,7 @@
       margin-bottom: 20px;
       border-radius: 8px;
       box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      height: 100%;
     }
 
     label {
@@ -76,58 +81,133 @@
       margin-top: 10px;
       cursor: pointer;
     }
+
+    /* Ensure both columns have the same height */
+    .row.equal-height {
+      display: flex;
+    }
+
+    .col-md-6 {
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Style for the prediction message */
+    #prediction-message {
+      margin-top: 15px;
+      color: green;
+      font-weight: bold;
+    }
   </style>
 </head>
 <body>
 
-  <h2>Book New Appointment</h2>
+  <h1>Book New Appointment</h1>
 
-  <div class="section">
-    <label for="symptom1">Select Symptoms 1 (Common)</label>
-    <select id="symptom1">
-      <option value="">-- Select --</option>
-    </select>
+  <div class="container">
+    <div class="row equal-height">
+      <!-- Left side: Select Symptoms & Predict Doctors -->
+      <div class="col-md-6">
+        <div class="section">
+          <label for="symptom1">Select Symptoms 1 (Common)</label>
+          <select id="symptom1" class="form-select">
+            <option value="">-- Select --</option>
+          </select>
 
-    <label for="symptom2">Select Symptoms 2 (Moderate)</label>
-    <select id="symptom2">
-      <option value="">-- Select --</option>
-    </select>
+          <label for="symptom2">Select Symptoms 2 (Moderate)</label>
+          <select id="symptom2" class="form-select">
+            <option value="">-- Select --</option>
+          </select>
 
-    <label for="symptom3">Select Symptoms 3 (Rare)</label>
-    <select id="symptom3">
-      <option value="">-- Select --</option>
-    </select>
+          <label for="symptom3">Select Symptoms 3 (Rare)</label>
+          <select id="symptom3" class="form-select">
+            <option value="">-- Select --</option>
+          </select>
 
-    <div class="tag-container" id="selected-symptoms"></div>
+          <div class="tag-container" id="selected-symptoms"></div>
 
-    <button id="predict-btn">Predict Doctors</button>
+          <!-- Predict Doctors Button -->
+          <button id="predict-btn" class="btn btn-dark w-100" onclick="predictDoctors()">Predict Doctors</button>
+
+          <!-- Prediction message -->
+          <p id="prediction-message" style="display: none;">Prediction is done</p>
+        </div>
+      </div>
+
+      <!-- Right side: Book Appointment -->
+      <div class="col-md-6">
+        <div class="section">
+          <label for="doctor-select">Select Doctor</label>
+          <select id="doctor-select" class="form-select">
+            <option value="">-- No doctor predicted yet --</option>
+          </select>
+
+          <label for="date">Select Date</label>
+          <input type="date" id="date" class="form-control">
+
+          <label for="time-select">Select Time</label>
+          <select id="time-select" class="form-select">
+            <option value="">-- Select --</option>
+            <option value="09:00 AM">09:00 AM</option>
+            <option value="10:00 AM">10:00 AM</option>
+            <option value="11:00 AM">11:00 AM</option>
+            <option value="12:00 PM">12:00 PM</option>
+            <option value="01:00 PM">02:00 PM</option>
+            <option value="03:00 PM">03:00 PM</option>
+            <option value="04:00 PM">04:00 PM</option>
+            <option value="05:00 PM">05:00 PM</option>
+            <option value="06:00 PM">06:00 PM</option>
+          </select>
+
+          <!-- Book Appointment Button -->
+          <button id="book-btn" class="btn btn-success w-100">Book Appointment</button>
+        </div>
+      </div>
+    </div>
   </div>
 
-  <div class="section">
-    <label for="doctor-select">Select Doctor</label>
-    <select id="doctor-select">
-      <option value="">-- No doctor predicted yet --</option>
-    </select>
+  <!-- Include Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+   // Function to show "Prediction is done" message
+  function predictDoctors() {
+    document.getElementById('prediction-message').style.display = 'block';
+  }
 
-    <label for="date">Select Date</label>
-    <input type="date" id="date">
+  document.addEventListener("DOMContentLoaded", function () {
+    const today = new Date().toISOString().split("T")[0];
+    const dateInput = document.getElementById("date");
+    const timeSelect = document.getElementById("time-select");
 
-    <label for="time-select">Select Time</label>
-    <select id="time-select">
-      <option value="">-- Select --</option>
-      <option value="09:00 AM">09:00 AM</option>
-      <option value="10:00 AM">10:00 AM</option>
-      <option value="11:00 AM">11:00 AM</option>
-      <option value="12:00 PM">12:00 PM</option>
-      <option value="03:00 PM">03:00 PM</option>
-      <option value="04:00 PM">04:00 PM</option>
-      <option value="05:00 PM">05:00 PM</option>
-      <option value="06:00 PM">06:00 PM</option>
-    </select>
+    // Set minimum date
+    dateInput.setAttribute("min", today);
 
-    <button id="book-btn">Book Appointment</button>
-  </div>
+    // Disable past time slots when date is selected
+    dateInput.addEventListener("change", function () {
+      const selectedDate = new Date(this.value);
+      const now = new Date();
+      const isToday = selectedDate.toDateString() === now.toDateString();
+      const isPast = selectedDate < new Date(now.toDateString());
 
+      Array.from(timeSelect.options).forEach(option => {
+        const timeValue = option.value;
+        if (!timeValue) return; // Skip "-- Select --"
+
+        const [timeString, modifier] = timeValue.split(' ');
+        let [hours, minutes] = timeString.split(':').map(Number);
+
+        if (modifier === 'PM' && hours !== 12) hours += 12;
+        if (modifier === 'AM' && hours === 12) hours = 0;
+
+        const optionDateTime = new Date(selectedDate);
+        optionDateTime.setHours(hours, minutes, 0, 0);
+
+        // Disable if the full date/time is in the past
+        option.disabled = optionDateTime < now || isPast;
+      });
+    });
+  });
+  </script>
   <script src="../js/appointment.js"></script>
 </body>
 </html>

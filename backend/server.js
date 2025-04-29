@@ -8,7 +8,7 @@ const patientRoutes = require("./routes/patientRoutes");
 const appointmentRoutes = require('./routes/appointmentRoutes');
 const doctorRoutes = require('./routes/doctorRoutes');
 const adminRoutes = require('./routes/adminRoutes');
-
+const configRoutes = require('./routes/configRoutes');
 dotenv.config(); // Load environment variables
 connectDB(); // Connect to MongoDB
 
@@ -25,6 +25,7 @@ app.use('/api/ai', aiRoutes);
 app.use('/api/appointment', appointmentRoutes);
 app.use('/api/doctor', doctorRoutes);
 app.use('/api/admin', adminRoutes);
+app.use('/api/config', configRoutes);
 
 
 

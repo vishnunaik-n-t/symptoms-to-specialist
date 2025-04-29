@@ -5,6 +5,116 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Patient Login/Register</title>
   <link rel="stylesheet" href="./css/style.css" />
+  <style>
+    body {
+      background-image: url('https://png.pngtree.com/background/20230525/original/pngtree-image-of-futuristic-medical-hospital-room-picture-image_2736851.jpg'); /* Path to your background image */
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      height: 100vh;
+      margin: 0;
+      font-family: Arial, sans-serif;
+    }
+
+    .auth-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100%;
+    }
+
+    .auth-card {
+      background: rgba(255, 255, 255, 0.9);
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+      width: 100%;
+      max-width: 400px; /* Set max-width for a consistent form width */
+    }
+
+    .auth-title {
+      text-align: center;
+      margin-bottom: 20px;
+      font-size: 24px;
+      color: #007bff;
+    }
+
+    .tab-buttons {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 20px;
+    }
+
+    .tab-btn {
+      background: #f0f0f0;
+      border: 1px solid #ccc;
+      padding: 10px 20px;
+      margin: 0 5px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .tab-btn.active {
+      background-color: #007bff;
+      color: white;
+    }
+
+    .auth-form input {
+      width: 100%; /* Ensure all input fields have the same width */
+      padding: 10px;
+      margin: 10px 0;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      font-size: 16px;
+    }
+
+    .password-container {
+      position: relative;
+      width: 100%; /* Ensure the password container is full width */
+    }
+
+    .eye-icon {
+      position: absolute;
+      right: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+      cursor: pointer;
+    }
+
+    .submit-btn {
+      width: 100%;
+      padding: 10px;
+      background-color: #007bff;
+      border: none;
+      border-radius: 5px;
+      color: white;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    .submit-btn:hover {
+      background-color: #0056b3;
+    }
+
+    .switch-login {
+      text-align: center;
+      margin-top: 20px;
+    }
+
+    .switch-login p {
+      font-size: 14px;
+    }
+
+    .switch-login a {
+      color: #007bff;
+      text-decoration: none;
+    }
+
+    .switch-login a:hover {
+      text-decoration: underline;
+    }
+
+  </style>
 </head>
 <body>
   <div class="auth-container">
@@ -20,7 +130,10 @@
       <form id="login-form" class="auth-form">
         <h3>Patient Login</h3>
         <input type="email" id="login-email" placeholder="Email" required />
-        <input type="password" id="login-password" placeholder="Password" required />
+        <div class="password-container">
+          <input type="password" id="login-password" placeholder="Password" required />
+          <span id="toggle-password-login" class="eye-icon">👁️</span>
+        </div>
         <button type="submit" class="submit-btn">Login</button>
       </form>
 
@@ -29,7 +142,10 @@
         <h3>Patient Register</h3>
         <input type="text" id="register-name" placeholder="Name" required />
         <input type="email" id="register-email" placeholder="Email" required />
-        <input type="password" id="register-password" placeholder="Password" required />
+        <div class="password-container">
+          <input type="password" id="register-password" placeholder="Password" required />
+          <span id="toggle-password-register" class="eye-icon">👁️</span>
+        </div>
         <input type="number" id="register-age" placeholder="Age" required />
 
         <select id="register-gender" required>
@@ -50,5 +166,26 @@
   </div>
 
   <script src="./js/auth.js"></script>
+  <script>
+    // Toggle password visibility for the login form
+    document.getElementById('toggle-password-login').addEventListener('click', function () {
+      const passwordField = document.getElementById('login-password');
+      const type = passwordField.type === 'password' ? 'text' : 'password';
+      passwordField.type = type;
+
+      // Change the icon based on the password field type
+      this.textContent = type === 'password' ? '👁️' : '🙈';
+    });
+
+    // Toggle password visibility for the register form
+    document.getElementById('toggle-password-register').addEventListener('click', function () {
+      const passwordField = document.getElementById('register-password');
+      const type = passwordField.type === 'password' ? 'text' : 'password';
+      passwordField.type = type;
+
+      // Change the icon based on the password field type
+      this.textContent = type === 'password' ? '👁️' : '🙈';
+    });
+  </script>
 </body>
 </html>

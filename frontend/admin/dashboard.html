@@ -2,41 +2,138 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Admin Dashboard</title>
-  <link rel="stylesheet" href="style.css" />
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f8f9fa;
+    }
+    .dashboard-container {
+      max-width: 1200px;
+      margin: 30px auto;
+      padding: 30px;
+      background-color: #fff;
+      border-radius: 8px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      position: relative;
+    }
+    h1 {
+      text-align: center;
+      color: #4CAF50;
+      padding-bottom: 20px;
+    }
+    .button-group .btn {
+      width: 100%;
+      padding: 15px;
+      font-size: 1.1rem;
+    }
+    .button-group .col {
+      padding: 0 10px;
+    }
+    .section {
+      margin-top: 30px;
+      display: none;
+      padding: 20px;
+    }
+    .form-input {
+      margin-bottom: 15px;
+    }
+    .form-group label {
+      font-weight: bold;
+    }
+    table th {
+      background-color: #4CAF50;
+      color: white;
+    }
+    table tbody tr:nth-child(even) {
+      background-color: #f9f9f9;
+    }
+    .hidden {
+      display: none;
+    }
+    input[type="radio"]:checked + .section {
+      display: block;
+    }
+
+    /* Position the logout button outside */
+    #logoutBtn {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      width: auto; /* Adjust width */
+      padding: 10px 20px; /* Add padding */
+    }
+  </style>
 </head>
 <body>
-  <div class="dashboard-container">
-    <h2>Welcome, Admin</h2>
-    <div class="button-group">
-      <button id="showAddDoctorBtn">Add Doctor</button>
-      <button id="showViewDoctorsBtn">View Doctors</button>
-      <button id="logoutBtn">Logout</button>
+
+  <div class="container dashboard-container">
+    <h1>Welcome, Admin</h1>
+    
+    <!-- Logout Button -->
+    <button id="logoutBtn" class="btn btn-danger">
+      <strong>Logout</strong>
+    </button>
+
+    <!-- Button Group: Add Doctor and View Doctors in Same Row -->
+    <div class="row button-group">
+      <div class="col-12 col-md-6 mb-3">
+        <label class="btn btn-success w-100">
+          <input type="radio" name="section-toggle" id="showAddDoctorBtn" class="d-none" checked />
+          <strong>Add Doctor</strong>
+        </label>
+      </div>
+      <div class="col-12 col-md-6 mb-3">
+        <label class="btn btn-primary w-100">
+          <input type="radio" name="section-toggle" id="showViewDoctorsBtn" class="d-none" />
+          <strong>View Doctors</strong>
+        </label>
+      </div>
     </div>
 
     <!-- Add Doctor Section -->
-    <section id="addDoctorSection" class="section hidden">
+    <section id="addDoctorSection" class="section">
       <h3>Add Doctor</h3>
       <form id="addDoctorForm">
-        <input type="text" id="name" placeholder="Name" required />
-        <input type="email" id="email" placeholder="Email" required />
-        <input type="password" id="password" placeholder="Password" autocomplete="current-password" required />
-        <input type="text" id="specialist" placeholder="Specialist (e.g. Cardiologist)" required />
-        <select id="availability" required>
+        <div class="mb-3">
+          <label for="name" class="form-label">Name</label>
+          <input type="text" id="name" class="form-control" placeholder="Name" required />
+        </div>
+        <div class="mb-3">
+          <label for="email" class="form-label">Email</label>
+          <input type="email" id="email" class="form-control" placeholder="Email" required />
+        </div>
+        <div class="mb-3">
+          <label for="password" class="form-label">Password</label>
+          <input type="password" id="password" class="form-control" placeholder="Password" autocomplete="current-password" required />
+        </div>
+        <div class="mb-3">
+          <label for="specialist" class="form-label">Specialist</label>
+          <input type="text" id="specialist" class="form-control" placeholder="Specialist (e.g. Cardiologist)" required />
+        </div>
+        <div class="mb-3">
+          <label for="availability" class="form-label">Availability</label>
+          <select id="availability" class="form-select" required>
             <option value="true">Available</option>
             <option value="false">Not Available</option>
-          </select>          
-        <input type="number" id="experience" placeholder="Experience (Years)" required />
-        <button type="submit">Add Doctor</button>
+          </select>
+        </div>
+        <div class="mb-3">
+          <label for="experience" class="form-label">Experience (Years)</label>
+          <input type="number" id="experience" class="form-control" placeholder="Experience (Years)" required />
+        </div>
+        <button type="submit" class="btn btn-success w-100">Add Doctor</button>
       </form>
       <p id="addDoctorMsg"></p>
     </section>
 
     <!-- View Doctors Section -->
-    <section id="viewDoctorsSection" class="section hidden">
+    <section id="viewDoctorsSection" class="section">
       <h3>All Doctors</h3>
-      <table id="doctorsTable">
+      <table class="table table-striped">
         <thead>
           <tr>
             <th>Name</th>
@@ -54,7 +151,9 @@
     </section>
   </div>
 
-   
-  <script src="dashboard.js"></script>
+  <!-- Bootstrap JS (Popper.js and Bootstrap JS) -->
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
+  <script src="./dashboard.js"></script>
 </body>
 </html>
