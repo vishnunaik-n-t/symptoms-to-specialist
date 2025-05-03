@@ -22,11 +22,30 @@
     </section>
 
     <section class="appointments-section">
-        <h3>Your Appointments</h3>
-        <div id="appointmentsList" class="appointment-list">
-          <p>Loading appointments...</p>
-        </div>
-      </section>
+      <h3>New Appointments</h3>
+      <label for="newFilter">Filter by Status:</label>
+      <select id="newFilter">
+        <option value="All">All</option>
+        <option value="Pending">Pending</option>
+        <option value="Accepted">Accepted</option>
+        <option value="Rescheduled">Rescheduled</option>
+        <option value="Cancelled">Cancelled</option>
+      </select>
+      <div id="newAppointmentsList" class="appointment-list"></div>
+    
+      <h3>Old Appointments</h3>
+      <label for="oldFilter">Filter by Status:</label>
+      <select id="oldFilter">
+        <option value="All">All</option>
+        <option value="Pending">Pending</option>
+        <option value="Accepted">Accepted</option>
+        <option value="Rescheduled">Rescheduled</option>
+        <option value="Cancelled">Cancelled</option>
+      </select>
+      <div id="oldAppointmentsList" class="appointment-list"></div>
+    </section>
+    
+    
 
   </div>
 

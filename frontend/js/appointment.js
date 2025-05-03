@@ -93,10 +93,11 @@ const symptoms = [
   
     const docSelect = document.getElementById("doctor-select");
     docSelect.innerHTML = `<option value="">-- Select --</option>`;
+     
     doctors.forEach(doc => {
       const opt = document.createElement("option");
-      opt.value = doc._id;
-      opt.textContent = `${doc.name} - ${doc.specialist} (${doc.experience} yrs)`;
+      opt.value = doc.doctorId;
+      opt.textContent = `${doc.name} - ${doc.specialist} (${doc.experience} yrs) ->  ${doc.match.toFixed(1)}%`;
       docSelect.appendChild(opt);
     });
   }
@@ -124,6 +125,7 @@ const symptoms = [
         time
       })
     });
+     
   
     const data = await res.json();
     if (res.ok) {
@@ -143,4 +145,3 @@ const symptoms = [
     document.getElementById("predict-btn").addEventListener("click", predictDoctor);
     document.getElementById("book-btn").addEventListener("click", bookAppointment);
   };
-  

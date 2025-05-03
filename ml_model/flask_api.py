@@ -24,10 +24,16 @@ def predict_specialist():
         symptom_vector = [1 if symptom in symptoms else 0 for symptom in symptom_list]
         
         # Predict specialist
-        prediction = model.predict([symptom_vector])[0]
-        specialist = specialist_encoder.inverse_transform([prediction])[0]
-        
-        return jsonify({'specialist': specialist})
+        probas = model.predict_proba([symptom_vector])[0]  # Get probability scores
+        top_indices = probas.argsort()[::-1][:3]  # Top 3 predicted specialists
+
+        results = []
+        for idx in top_indices:
+            specialist_label = specialist_encoder.inverse_transform([idx])[0]
+            confidence = round(probas[idx] * 100, 2)  # e.g., 62.3%
+            results.append({'specialist': specialist_label, 'confidence': confidence})
+
+        return jsonify({'top_specialists': results})
     except Exception as e:
         return jsonify({'message': 'Error processing request', 'error': str(e)}), 500
 

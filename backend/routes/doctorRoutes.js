@@ -65,20 +65,39 @@ router.get('/profile', authDoctor, async (req, res) => {
 
 
 
-router.get('/view-appointments', authDoctor, async (req, res) => {
+  router.get('/view-appointments', authDoctor, async (req, res) => {
     try {
-      const doctorId = req.user.doctorId; // From JWT
+      const doctorId = req.user.doctorId;
   
+      // Fetch all appointments for the doctor
       const appointments = await Appointment.find({ doctorId: doctorId })
-        .populate('patientId', 'name age gender') // Populate basic patient info
-        .sort({ date: 1 });
+        .populate('patientId', 'name age gender')
+        .sort({ date: 1 }); // Sort by appointment date ascending
   
-      res.status(200).json(appointments);
+      const today = new Date();
+      today.setHours(0, 0, 0, 0); // Normalize to start of the day
+  
+      const oldAppointments = [];
+      const newAppointments = [];
+  
+      appointments.forEach(appointment => {
+        const appointmentDate = new Date(appointment.date);
+        appointmentDate.setHours(0, 0, 0, 0); // Normalize too
+  
+        if (appointmentDate < today) {
+          oldAppointments.push(appointment);
+        } else {
+          newAppointments.push(appointment);
+        }
+      });
+  
+      res.status(200).json({ oldAppointments, newAppointments });
     } catch (error) {
       console.error('Error in /doctor/view-appointments:', error);
       res.status(500).json({ error: 'Server error' });
     }
   });
+  
 
 
   router.put('/update-status/:appointmentId', authDoctor, async (req, res) => {

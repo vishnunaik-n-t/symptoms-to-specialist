@@ -23,25 +23,25 @@ router.post('/book-appointment', authMiddleware, async (req, res) => {
             return res.status(400).json({ message: 'Appointment date must be in the future...' });
         }
         // For same-day appointment, check time
-if (appointmentDate.toDateString() === today.toDateString()) {
-    // Parse time (expects format like "3:30 PM")
-    const [timeString, modifier] = time.split(' ');
-    let [hours, minutes] = timeString.split(':').map(Number);
+        if (appointmentDate.toDateString() === today.toDateString()) {
+            // Parse time (expects format like "3:30 PM")
+            const [timeString, modifier] = time.split(' ');
+            let [hours, minutes] = timeString.split(':').map(Number);
 
-    if (modifier.toUpperCase() === 'PM' && hours !== 12) {
-        hours += 12;
-    }
-    if (modifier.toUpperCase() === 'AM' && hours === 12) {
-        hours = 0;
-    }
+            if (modifier.toUpperCase() === 'PM' && hours !== 12) {
+                hours += 12;
+            }
+            if (modifier.toUpperCase() === 'AM' && hours === 12) {
+                hours = 0;
+            }
 
-    const inputDateTime = new Date(appointmentDate);
-    inputDateTime.setHours(hours, minutes, 0, 0);
+            const inputDateTime = new Date(appointmentDate);
+            inputDateTime.setHours(hours, minutes, 0, 0);
 
-    if (inputDateTime < today) {
-        return res.status(400).json({ message: 'Appointment time must be in the future for today' });
-    }
-}
+            if (inputDateTime < today) {
+                return res.status(400).json({ message: 'Appointment time must be in the future for today' });
+            }
+        }
 
         // Check if doctor exists & is available
         const doctor = await Doctor.findById(doctorId);
@@ -67,6 +67,8 @@ if (appointmentDate.toDateString() === today.toDateString()) {
         await newAppointment.save();
         res.status(201).json({ message: 'Appointment booked successfully', appointment: newAppointment });
     } catch (error) {
+        console.error("Appointment Booking Error:", error);
+        // console.log("Appointment Booking Error:", error);
         res.status(500).json({ message: 'Server error', error: error.message });
     }
 });
