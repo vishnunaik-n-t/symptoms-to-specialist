@@ -99,7 +99,7 @@ document.addEventListener('DOMContentLoaded', () => {
             <td>${doc.specialist}</td>
             <td>${doc.availability ? 'Yes' : 'No'}</td>
             <td>${doc.experience} yrs</td>
-            <td><button onclick="deleteDoctor('${doc._id}')">Delete</button></td>
+            <td><button class="btn-sm btn-logout" onclick="deleteDoctor('${doc._id}')">Delete</button></td>
           `;
           doctorsTableBody.appendChild(tr);
         });

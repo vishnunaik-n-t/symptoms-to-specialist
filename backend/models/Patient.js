@@ -7,7 +7,13 @@ const PatientSchema = new mongoose.Schema({
     password: { type: String, required: true },
     age: { type: Number, required: true },
     gender: { type: String, required: true, enum: ['Male', 'Female', 'Other'] },
-    medicalHistory: { type: Array, default: [] } // Optional medical history field
+    medicalHistory: { type: Array, default: [] }
+    // otp: {
+    // type: String,
+    // },
+    // otpExpires: {
+    // type: Date,
+    // }
 });
 
 
